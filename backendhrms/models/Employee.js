@@ -1,6 +1,7 @@
 // backend/models/Employee.js
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
+
 
 const EmployeeSchema = new mongoose.Schema({
   name: { type: String, required: true },
