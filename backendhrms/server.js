@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors(
   {
     origin : 'https://hrmfrontend-cfkj.onrender.com',
-    methods : ['POST', 'GET'],
+    methods : ['POST', 'GET','PUT','PATCH','DELETE'],
     credentials : true
   }
 ));
