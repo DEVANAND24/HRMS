@@ -14,7 +14,7 @@ const EmployeeDirectory = () => {
     // Fetch employee data from backend
     const fetchEmployees = async () => {
       try {
-        const response = await fetch('https://hrmsbackend-in32.onrender.com/api/employees', {
+        const response = await fetch('https://hrms-backend-yxcw.onrender.com/api/employees', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,

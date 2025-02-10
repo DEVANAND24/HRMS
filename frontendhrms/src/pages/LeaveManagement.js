@@ -23,7 +23,7 @@ const LeaveManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://hrmsbackend-in32.onrender.com/api/leaves', {
+      const res = await fetch('https://hrms-backend-yxcw.onrender.com/api/leaves', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 // src/api.js
-const BASE_URL = 'https://hr-backend-h02e.onrender.com/api';
+const BASE_URL = 'https://hrms-backend-yxcw.onrender.com/api';
 
 export const fetchWithAuth = async (endpoint, token, options = {}) => {
   const headers = {

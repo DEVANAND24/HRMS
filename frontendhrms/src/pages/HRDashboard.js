@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import AuthContext from '../context/AuthContext';
 import '../styles/HRDashboard.css';
 
-const BASE_URL = "https://hrmsbackend-in32.onrender.com";
+const BASE_URL = "https://hrms-backend-yxcw.onrender.com";
 
 const HRDashboard = () => {
   const { user } = useContext(AuthContext);
@@ -15,7 +15,7 @@ const HRDashboard = () => {
     // Fetch employee information
     const fetchEmployees = async () => {
       try {
-        const res = await fetch('https://hrmsbackend-in32.onrender.com/api/employees', {
+        const res = await fetch('https://hrms-backend-yxcw.onrender.com/api/employees', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
@@ -31,7 +31,7 @@ const HRDashboard = () => {
     // Fetch leave requests (all, since HR can see them all)
     const fetchLeaveRequests = async () => {
       try {
-        const res = await fetch('https://hrmsbackend-in32.onrender.com/api/leaves', {
+        const res = await fetch('https://hrms-backend-yxcw.onrender.com/api/leaves', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
@@ -51,7 +51,7 @@ const HRDashboard = () => {
   // Handler for updating leave status
   const updateLeaveStatus = async (leaveId, newStatus) => {
     try {
-      const res = await fetch(`https://hrmsbackend-in32.onrender.com/api/leaves/${leaveId}`, {
+      const res = await fetch(`https://hrms-backend-yxcw.onrender.com/api/leaves/${leaveId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

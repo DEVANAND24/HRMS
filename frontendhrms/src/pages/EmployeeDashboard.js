@@ -12,7 +12,7 @@ const EmployeeDashboard = () => {
   useEffect(() => {
     const fetchLeaves = async () => {
       try {
-        const response = await fetch("https://hrmsbackend-in32.onrender.com/api/leaves", {
+        const response = await fetch("https://hrms-backend-yxcw.onrender.com/api/leaves", {
           headers: { 
             "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}` 
