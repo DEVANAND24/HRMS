@@ -1,0 +1,35 @@
+/* src/styles/Navbar.css */
+.navbar {
+    background-color: #161616;
+    padding: 25px 20px 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: aliceblue;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    font-weight: bolder;
+  }
+  
+  .navbar-links li {
+    margin: 0;
+  }
+  
+  .logout-btn {
+    background-color: #dc3545;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 4px;
+  }
+  

@@ -1,0 +1,25 @@
+/* src/styles/LeaveManagement.css */
+.leave-management-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgb(21, 21, 21);
+    border-radius: 8px;
+    color:aliceblue;
+  }
+  
+  .leave-form,
+  .leave-requests,
+  .calendar-view {
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .btn{
+    background-color: beige;
+    color: black;
+  }
+  

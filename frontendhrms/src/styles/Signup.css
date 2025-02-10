@@ -1,0 +1,23 @@
+/* src/styles/Signup.css */
+.signup-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: rgb(207, 193, 161);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .signup-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .signup-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .signup-form button {
+    width: 100%;
+  }
+  

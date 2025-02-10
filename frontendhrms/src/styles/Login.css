@@ -1,0 +1,23 @@
+/* src/styles/Login.css */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background: rgb(207, 193, 161);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .login-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .login-form button {
+    width: 100%;
+  }
+  

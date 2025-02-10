@@ -1,0 +1,39 @@
+/* src/styles/EmployeeDirectory.css */
+.employee-directory-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgb(33, 33, 33);
+    border-radius: 8px;
+    color: #f7f2f2;
+
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .filter-section input {
+    flex: 1;
+  }
+  
+  .employee-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .employee-table td {
+    border: 1px solid #0f0f0f;
+    padding: 8px;
+  }
+  
+  .employee-table th {
+    background-color: #141414;
+  }
+  
+  .employee-table tr {
+    background-color: #c96698;
+  }
+  

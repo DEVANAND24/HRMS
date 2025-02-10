@@ -1,0 +1,25 @@
+/* src/styles/EmployeeDashboard.css */
+.dashboard-container1 {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #e5c999;
+    border-radius: 8px;
+    color: #000;
+  }
+  
+  .quick-access-buttons button {
+    margin-right: 10px;
+  }
+
+  .dash-h2{
+    background-color: #000;
+    align-items: center;
+    color:#e5c999;
+    display:flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 10px;
+  }
+  
