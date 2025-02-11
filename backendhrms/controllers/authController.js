@@ -22,7 +22,7 @@ export const signup = async (req, res) => {
       email,
       password,
       contact: mobile,
-      department: department || '',
+      department: department,
       role: role || 'Employee',
     });
     res.status(201).json({
@@ -30,6 +30,7 @@ export const signup = async (req, res) => {
       name: user.name,
       email: user.email,
       role: user.role,
+      department: user.department,
       token: generateToken(user._id, user.role),
     });
   } catch (error) {
