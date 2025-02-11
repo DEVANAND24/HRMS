@@ -78,13 +78,15 @@ const Signup = () => {
         </div>
         <div className="form-group">
           <label>Department</label>
-          <input 
-            type="text" 
-            name="department" 
-            value={formData.department}
-            onChange={handleChange} 
-            required 
-          />
+          <select name= "department" value={formData.department} onChange={handleSubmit}>
+            <option value="">All Departments</option>
+            <option value="Developer">Engineering</option>
+            <option value="Sales">Sales</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Analyst">Sales</option>
+
+            {/* Add other departments as needed */}
+          </select>
         </div>
         <button type="submit">Sign Up</button>
       </form>
