@@ -11,7 +11,7 @@ const EmployeeDirectory = () => {
   const [department, setDepartment] = useState('');
 
   useEffect(() => {
-    // Fetch employee data from backend
+    // Fetch employee data from backend API
     const fetchEmployees = async () => {
       try {
         const response = await fetch('https://hrms-backend-yxcw.onrender.com/api/employees', {
@@ -21,14 +21,20 @@ const EmployeeDirectory = () => {
           },
         });
         const data = await response.json();
+        console.log(data); // For debugging, to see the fetched data
         setEmployees(data);
       } catch (error) {
         console.error('Error fetching employees:', error);
       }
     };
-    fetchEmployees();
+
+    // Only fetch if user.token is available
+    if (user && user.token) {
+      fetchEmployees();
+    }
   }, [user]);
 
+  // Filter employees based on search input and department filter
   const filteredEmployees = employees.filter(emp => {
     return (
       emp.name.toLowerCase().includes(search.toLowerCase()) &&
