@@ -80,7 +80,7 @@ const Signup = () => {
           <label>Department</label>
           <select name= "department" value={formData.department} onChange={handleChange}>
             <option value="">All Departments</option>
-            <option value="Developer">Engineering</option>
+            <option value="Developer">Developer</option>
             <option value="Sales">Sales</option>
             <option value="Marketing">Marketing</option>
             <option value="Analyst">Analyst</option>
