@@ -11,6 +11,7 @@ const Signup = () => {
     email: '',
     password: '',
     mobile: '',
+    department: '',
     role: 'Employee',
   });
 
@@ -74,6 +75,16 @@ const Signup = () => {
             <option value="Employee">Employee</option>
             <option value="HR">HR</option>
           </select>
+        </div>
+        <div className="form-group">
+          <label>Department</label>
+          <input 
+            type="text" 
+            name="department" 
+            value={formData.department}
+            onChange={handleChange} 
+            required 
+          />
         </div>
         <button type="submit">Sign Up</button>
       </form>

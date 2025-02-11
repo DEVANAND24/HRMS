@@ -19,7 +19,7 @@ const Login = () => {
     const userData = {
       email: formData.email,
       role: formData.role,
-      name: formData.name, // This would come from the backend.
+      name: '', // This would come from the backend.
     };
     login(userData);
   };
