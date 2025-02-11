@@ -12,7 +12,7 @@ const Signup = () => {
     password: '',
     mobile: '',
     department: '',
-    role: 'Employee',
+    role: '',
   });
 
   const handleChange = (e) => {
