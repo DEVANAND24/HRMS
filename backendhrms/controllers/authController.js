@@ -14,9 +14,7 @@ export const signup = async (req, res) => {
     // Check if the user already exists
     const existingUser = await Employee.findOne({ email });
     if (existingUser) {
-      console.error("User already exist");
       return res.status(400).json({ message: 'User already exists' });
-      
     }
     // Create a new employee record
     const user = await Employee.create({
@@ -53,7 +51,6 @@ export const login = async (req, res) => {
         token: generateToken(user._id, user.role),
       });
     } else {
-      console.error("Invalid password");
       res.status(401).json({ message: 'Invalid email or password' });
     }
   } catch (error) {
