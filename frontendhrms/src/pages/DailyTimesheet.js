@@ -40,7 +40,8 @@ const DailyTimesheet = () => {
         setError(data.message);
       } else {
         setTimesheet(data);
-        localStorage.setItem('currentTimesheet', JSON.stringify(data));
+        // Store current session in sessionStorage (per-tab)
+        sessionStorage.setItem('currentTimesheet', JSON.stringify(data));
         const initialTime = calculateElapsedTime(data.loginTime);
         setTimer(initialTime);
         const id = setInterval(() => setTimer((prev) => prev + 1), 1000);
@@ -72,7 +73,8 @@ const DailyTimesheet = () => {
         clearInterval(intervalId);
         setIntervalId(null);
         setTimer(0);
-        localStorage.removeItem('currentTimesheet');
+        // Remove the session from sessionStorage
+        sessionStorage.removeItem('currentTimesheet');
 
         // Fetch updated timesheet history to update the table and calendar
         fetchTimesheetHistory();
@@ -100,9 +102,9 @@ const DailyTimesheet = () => {
     }
   };
 
-  // Restore active session from localStorage and fetch history on mount
+  // Restore active session from sessionStorage and fetch history on mount
   useEffect(() => {
-    const savedSession = localStorage.getItem('currentTimesheet');
+    const savedSession = sessionStorage.getItem('currentTimesheet');
     if (savedSession) {
       const session = JSON.parse(savedSession);
       if (!session.logoutTime) {
@@ -117,7 +119,7 @@ const DailyTimesheet = () => {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update the calendar marks with submitted timesheets
   const marks = {};
