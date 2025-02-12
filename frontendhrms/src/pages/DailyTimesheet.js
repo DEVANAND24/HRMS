@@ -150,25 +150,39 @@ const DailyTimesheet = () => {
           </button>
         )}
         {submitted && (
-          <div className="submitted-timesheets">
-            <h3>Your Timesheet History</h3>
-            <ul>
-              {timesheetsHistory.map(ts => (
-                <li key={ts._id}>
-                  {new Date(ts.date).toLocaleDateString()} - Status: {ts.status} - 
-                  Login: {new Date(ts.loginTime).toLocaleTimeString()} - 
-                  Logout: {ts.logoutTime ? new Date(ts.logoutTime).toLocaleTimeString() : 'In Session'}
-                  {ts.tasks && ` - Tasks: ${ts.tasks}`}
-                  {ts.githubLink && (
-                    <>
-                      {' '} - <a href={ts.githubLink} target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+  <div className="submitted-timesheets">
+    <h3 className='timeTable'>Your Timesheet History</h3>
+    <table className="timesheet-history-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Login Time</th>
+          <th>Logout Time</th>
+          <th>Tasks</th>
+          <th>GitHub</th>
+        </tr>
+      </thead>
+      <tbody>
+        {timesheetsHistory.map(ts => (
+          <tr key={ts._id}>
+            <td>{new Date(ts.date).toLocaleDateString()}</td>
+            <td>{ts.status}</td>
+            <td>{new Date(ts.loginTime).toLocaleTimeString()}</td>
+            <td>{ts.logoutTime ? new Date(ts.logoutTime).toLocaleTimeString() : 'In Session'}</td>
+            <td>{ts.tasks || '-'}</td>
+            <td>
+              {ts.githubLink ? (
+                <a href={ts.githubLink} target="_blank" rel="noopener noreferrer">GitHub</a>
+              ) : '-'}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
         <div className="calendar-section">
           <h3>Timesheet Calendar</h3>
           <Calendar

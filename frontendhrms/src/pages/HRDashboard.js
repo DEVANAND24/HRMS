@@ -72,7 +72,7 @@ const HRDashboard = () => {
       <div className="dashboard-container">
         <h2 className="hrd1">HR Dashboard</h2>
         <section className="employee-info1">
-          <h3>My Information</h3>
+          <h3 className='inf'>My Information</h3>
           <p>
             <strong>Name:</strong> {user.name}
           </p>

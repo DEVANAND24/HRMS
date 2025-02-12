@@ -29,9 +29,46 @@
     color:black;
 }
 
-.submitted-timesheets{
-    color :black;
-}
 .calendar-section{
     color : black;
+}
+
+.timeTable{
+  background-color: #000;
+  align-items: center;
+  color:#e5c999;
+  display:flex;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bolder;
+  padding: 10px;
+}
+
+.timesheet-history-table{
+  width: 100%;
+    border-collapse: collapse;
+}
+
+.timesheet-history-table th,
+.timesheet-history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .timesheet-history-table th {
+    background-color: #101010;
+    text-align: center;
+  }
+
+  .timesheet-history-table td {
+    background-color: #e5c999;
+    color : black;
+  }
+
+.submitted-timesheets{
+  max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #111111;
+    border-radius: 8px;
 }

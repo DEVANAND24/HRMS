@@ -6,7 +6,11 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
 
   const apiUrl =  'https://hrms-backend-yxcw.onrender.com';
 
@@ -21,6 +25,7 @@ export const AuthProvider = ({ children }) => {
       throw new Error(data.message || "Login failed");
     }
     setUser(data);
+    localStorage.setItem('user', JSON.stringify(data));
     navigate(data.role === 'HR' ? '/hr-dashboard' : '/employee-dashboard');
   };
 
@@ -35,11 +40,13 @@ export const AuthProvider = ({ children }) => {
       throw new Error(data.message || "Signup failed");
     }
     setUser(data);
+    localStorage.setItem('user', JSON.stringify(data));
     navigate(data.role === 'HR' ? '/hr-dashboard' : '/employee-dashboard');
   };
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('user');
     navigate('/login');
   };
 
