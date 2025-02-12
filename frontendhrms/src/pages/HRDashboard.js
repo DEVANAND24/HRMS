@@ -83,7 +83,7 @@ const HRDashboard = () => {
           </p>
 
           <p>
-            <strong>Department:</strong> {user.department || "N/A"}
+            <strong>Department:</strong> {user.department}
           </p>
          
         </section>
