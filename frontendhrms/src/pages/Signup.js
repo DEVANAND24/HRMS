@@ -12,7 +12,7 @@ const Signup = () => {
     password: '',
     mobile: '',
     department: '',
-    role: '',
+    role: 'Employee',
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
