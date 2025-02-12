@@ -1,19 +1,21 @@
 // src/context/AuthContext.js
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+
+  // Store session per tab instead of global storage
   const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = sessionStorage.getItem('currentUser'); // Use sessionStorage instead of localStorage
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
+  const apiUrl = 'https://hrms-backend-yxcw.onrender.com';
 
-  const apiUrl =  'https://hrms-backend-yxcw.onrender.com';
-
+  // Login function
   const login = async (credentials) => {
     const response = await fetch(`${apiUrl}/auth/login`, {
       method: 'POST',
@@ -25,10 +27,11 @@ export const AuthProvider = ({ children }) => {
       throw new Error(data.message || "Login failed");
     }
     setUser(data);
-    localStorage.setItem('user', JSON.stringify(data));
+    sessionStorage.setItem('currentUser', JSON.stringify(data)); // Store user session per tab
     navigate(data.role === 'HR' ? '/hr-dashboard' : '/employee-dashboard');
   };
 
+  // Signup function
   const signup = async (userData) => {
     const response = await fetch(`${apiUrl}/auth/signup`, {
       method: 'POST',
@@ -40,15 +43,29 @@ export const AuthProvider = ({ children }) => {
       throw new Error(data.message || "Signup failed");
     }
     setUser(data);
-    localStorage.setItem('user', JSON.stringify(data));
+    sessionStorage.setItem('currentUser', JSON.stringify(data)); // Store user session per tab
     navigate(data.role === 'HR' ? '/hr-dashboard' : '/employee-dashboard');
   };
 
+  // Logout function
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('currentUser'); // Only clear session in the current tab
     navigate('/login');
   };
+
+  // Sync logout across tabs (Optional, if needed)
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === 'logout-event') {
+        setUser(null);
+        navigate('/login');
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [navigate]);
 
   return (
     <AuthContext.Provider value={{ user, login, signup, logout }}>

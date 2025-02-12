@@ -1,4 +1,3 @@
-// src/pages/DailyTimesheet.js
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../context/AuthContext';
 import Navbar from '../components/Navbar';
@@ -18,6 +17,9 @@ const DailyTimesheet = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const apiUrl = process.env.REACT_APP_API_URL || 'https://hrms-backend-yxcw.onrender.com/timesheets';
+
+  // Unique session key per user to avoid conflicts
+  const sessionKey = `timesheetSession_${user?.email}`;
 
   // Helper function to calculate elapsed time from loginTime
   const calculateElapsedTime = (loginTime) => {
@@ -40,8 +42,7 @@ const DailyTimesheet = () => {
         setError(data.message);
       } else {
         setTimesheet(data);
-        // Store current session in sessionStorage (per-tab)
-        sessionStorage.setItem('currentTimesheet', JSON.stringify(data));
+        sessionStorage.setItem(sessionKey, JSON.stringify(data)); // Store session per user
         const initialTime = calculateElapsedTime(data.loginTime);
         setTimer(initialTime);
         const id = setInterval(() => setTimer((prev) => prev + 1), 1000);
@@ -73,10 +74,9 @@ const DailyTimesheet = () => {
         clearInterval(intervalId);
         setIntervalId(null);
         setTimer(0);
-        // Remove the session from sessionStorage
-        sessionStorage.removeItem('currentTimesheet');
+        sessionStorage.removeItem(sessionKey); // Remove user-specific session
 
-        // Fetch updated timesheet history to update the table and calendar
+        // Fetch updated timesheet history
         fetchTimesheetHistory();
       }
     } catch (err) {
@@ -104,7 +104,7 @@ const DailyTimesheet = () => {
 
   // Restore active session from sessionStorage and fetch history on mount
   useEffect(() => {
-    const savedSession = sessionStorage.getItem('currentTimesheet');
+    const savedSession = sessionStorage.getItem(sessionKey);
     if (savedSession) {
       const session = JSON.parse(savedSession);
       if (!session.logoutTime) {
@@ -121,18 +121,11 @@ const DailyTimesheet = () => {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Update the calendar marks with submitted timesheets
-  const marks = {};
-  timesheetsHistory.forEach((ts) => {
-    const dateStr = new Date(ts.date).toDateString();
-    marks[dateStr] = ts.status;
-  });
-
   return (
     <div>
       <Navbar />
       <div className="timesheet-container">
-        <h2 className="dtsh2">Daily Timesheet</h2>
+        <h2>Daily Timesheet</h2>
         {error && <p className="error-message">{error}</p>}
 
         {!timesheet && (
@@ -142,74 +135,14 @@ const DailyTimesheet = () => {
         )}
 
         {timesheet && !timesheet.logoutTime && (
-          <div className="timediv">
+          <div>
             <p>Session started at: {new Date(timesheet.loginTime).toLocaleTimeString()}</p>
             <p>Elapsed time: {Math.floor(timer / 60)}m {timer % 60}s</p>
-            <div className="task-input">
-              <label>Tasks Completed Today:</label>
-              <textarea value={tasks} onChange={(e) => setTasks(e.target.value)} placeholder="Describe your tasks..." />
-            </div>
-            <div className="github-input">
-              <label>GitHub Repository Link:</label>
-              <input type="url" value={githubLink} onChange={(e) => setGithubLink(e.target.value)} placeholder="https://github.com/your-repo" />
-            </div>
             <button onClick={endSession} disabled={loading}>
               {loading ? 'Ending...' : 'End Session'}
             </button>
           </div>
         )}
-
-        {timesheet && timesheet.logoutTime && !submitted && (
-          <button onClick={fetchTimesheetHistory} disabled={loading}>
-            {loading ? 'Submitting...' : 'Submit Timesheet'}
-          </button>
-        )}
-
-        {submitted && (
-          <div className="submitted-timesheets">
-            <h3 className="timeTable">Your Timesheet History</h3>
-            <table className="timesheet-history-table">
-              <thead>
-                <tr className="thead1">
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Login Time</th>
-                  <th>Logout Time</th>
-                  <th>Tasks</th>
-                  <th>GitHub</th>
-                </tr>
-              </thead>
-              <tbody>
-                {timesheetsHistory.map((ts) => (
-                  <tr key={ts._id}>
-                    <td>{new Date(ts.date).toLocaleDateString()}</td>
-                    <td>{ts.status}</td>
-                    <td>{new Date(ts.loginTime).toLocaleTimeString()}</td>
-                    <td>{ts.logoutTime ? new Date(ts.logoutTime).toLocaleTimeString() : 'In Session'}</td>
-                    <td>{ts.tasks || '-'}</td>
-                    <td>
-                      {ts.githubLink ? <a href={ts.githubLink} target="_blank" rel="noopener noreferrer">GitHub</a> : '-'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        <div className="calendar-section">
-          <h3 className="timecal">Timesheet Calendar</h3>
-          <Calendar
-            tileContent={({ date, view }) => {
-              if (view === "month") {
-                const dateStr = date.toDateString();
-                const status = marks[dateStr];
-                return status ? <p style={{ color: status === "Present" ? "green" : "red" }}>{status}</p> : null;
-              }
-              return null;
-            }}
-          />
-        </div>
       </div>
     </div>
   );
