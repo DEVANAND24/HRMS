@@ -48,10 +48,10 @@ export const endTimesheet = async (req, res) => {
     // Calculate the duration in hours.
     const maxDuration = (timesheet.logoutTime - timesheet.loginTime) / (1000 * 60 * 60);
     // Mark "Present" if session is within 24 hours, otherwise "Absent"
-    timesheet.status = (duration <= 24) ? 'Present' : 'Absent';
+    timesheet.status = (maxDuration <= 24) ? 'Present' : 'Absent';
     const minDuration = (timesheet.logoutTime - timesheet.loginTime) / (1000 * 60 * 60);
     // Mark as "Present" only if the session is 9 or more hours; otherwise "Absent"
-    timesheet.status = (duration >= 9) ? 'Present' : 'Absent';
+    timesheet.status = (minDuration >= 9) ? 'Present' : 'Absent';
 
     const updatedTimesheet = await timesheet.save();
     res.json(updatedTimesheet);

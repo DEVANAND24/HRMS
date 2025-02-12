@@ -4,7 +4,6 @@
     margin: 20px auto;
     padding: 20px;
     background: #e5c999;
-    color : white;
     border-radius: 8px;
   }
   .error-message {
@@ -15,3 +14,7 @@
     margin-bottom: 15px;
   }
   
+  h2, h3, label, p {
+    color : black;
+
+  }
