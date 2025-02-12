@@ -3,7 +3,8 @@
     max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff;
+    color : white;
+    background: #111111;
     border-radius: 8px;
   }
   
@@ -19,7 +20,11 @@
   }
   
   .timesheet-table th {
-    background-color: #f2f2f2;
+    background-color: #101010;
     text-align: left;
+  }
+
+  .timesheet-table td {
+    background-color: #e5c999;
   }
   

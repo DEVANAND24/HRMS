@@ -3,7 +3,8 @@
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff;
+    background: #e5c999;
+    color : white;
     border-radius: 8px;
   }
   .error-message {

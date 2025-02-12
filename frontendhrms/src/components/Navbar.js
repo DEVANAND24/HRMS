@@ -15,15 +15,15 @@ const Navbar = () => {
           <>
             <li><Link to="/hr-dashboard">Dashboard</Link></li>
             <li><Link to="/employee-directory">Employee Directory</Link></li>
-            <li><Link to="/hr-timesheets">Employee Directory</Link></li>
+            <li><Link to="/hr-timesheets">Employee Timesheet</Link></li>
 
           </>
         )}
         {user && user.role === 'Employee' && (
           <>
             <li><Link to="/employee-dashboard">Dashboard</Link></li>
-            <li><Link to="/leave-management">Leave Management</Link></li>
-            <li><Link to="/daily-timesheet">TimeSheet</Link></li>
+            <li><Link to="/leave-management">Leave Request</Link></li>
+            <li><Link to="/daily-timesheet">My TimeSheet</Link></li>
 
 
           </>

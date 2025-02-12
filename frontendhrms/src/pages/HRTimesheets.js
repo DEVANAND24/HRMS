@@ -12,7 +12,7 @@ const HRTimesheets = () => {
   useEffect(() => {
     const fetchTimesheets = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/timesheets`, {
+        const response = await fetch(`${apiUrl}/timesheets`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
