@@ -23,9 +23,9 @@ app.use(cors(
 ));
 
 // API routes
-app.use('/api/auth', authRoutes);
-app.use('/api/employees', employeeRoutes);
-app.use('/api/leaves', leaveRoutes);
+app.use('/auth', authRoutes);
+app.use('/employees', employeeRoutes);
+app.use('/leaves', leaveRoutes);
 
 const PORT = process.env.PORT || 5000;
 

@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   // Real login using API call to backend
   const login = async (credentials) => {
     try {
-      const response = await fetch('https://hrms-backend-yxcw.onrender.com/api/auth/login', {
+      const response = await fetch('https://hrms-backend-yxcw.onrender.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   // For signup, you can add a similar function (or handle it in your Signup page)
   const signup = async (userData) => {
     try {
-      const response = await fetch('https://hrms-backend-yxcw.onrender.com/api/auth/signup', {
+      const response = await fetch('https://hrms-backend-yxcw.onrender.com/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),

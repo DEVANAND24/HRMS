@@ -15,7 +15,7 @@ const HRDashboard = () => {
     // Fetch employee information
     const fetchEmployees = async () => {
       try {
-        const res = await fetch('https://hrms-backend-yxcw.onrender.com/api/employees', {
+        const res = await fetch('https://hrms-backend-yxcw.onrender.com/employees', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
@@ -31,7 +31,7 @@ const HRDashboard = () => {
     // Fetch leave requests (all, since HR can see them all)
     const fetchLeaveRequests = async () => {
       try {
-        const res = await fetch('https://hrms-backend-yxcw.onrender.com/api/leaves', {
+        const res = await fetch('https://hrms-backend-yxcw.onrender.com/leaves', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
@@ -51,7 +51,7 @@ const HRDashboard = () => {
   // Handler for updating leave status
   const updateLeaveStatus = async (leaveId, newStatus) => {
     try {
-      const res = await fetch(`https://hrms-backend-yxcw.onrender.com/api/leaves/${leaveId}`, {
+      const res = await fetch(`https://hrms-backend-yxcw.onrender.com/leaves/${leaveId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
