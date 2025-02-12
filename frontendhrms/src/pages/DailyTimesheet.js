@@ -154,7 +154,7 @@ const DailyTimesheet = () => {
     <h3 className='timeTable'>Your Timesheet History</h3>
     <table className="timesheet-history-table">
       <thead>
-        <tr>
+        <tr className='thead1'>
           <th>Date</th>
           <th>Status</th>
           <th>Login Time</th>
