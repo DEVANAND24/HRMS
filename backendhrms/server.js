@@ -6,6 +6,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import leaveRoutes from './routes/leaveRoutes.js';
 import employeeRoutes from './routes/employeeRoutes.js';
+import timesheetRoutes from './routes/timesheetRoutes.js';
 
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(cors(
 app.use('/auth', authRoutes);
 app.use('/employees', employeeRoutes);
 app.use('/leaves', leaveRoutes);
+app.use('/api/timesheets', timesheetRoutes);
 
 const PORT = process.env.PORT || 5000;
 

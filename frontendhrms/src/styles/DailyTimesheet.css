@@ -1,0 +1,16 @@
+/* frontend/src/styles/DailyTimesheet.css */
+.timesheet-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+  }
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+  }
+  .task-input, .github-input {
+    margin-bottom: 15px;
+  }
+  

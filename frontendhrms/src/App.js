@@ -9,6 +9,7 @@ import LeaveManagement from './pages/LeaveManagement';
 import EmployeeDirectory from './pages/EmployeeDirectory';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
+import DailyTimesheet from './pages/DailyTimesheet';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="/employee-directory" element={<EmployeeDirectory />} />
               <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
               <Route path="/leave-management" element={<LeaveManagement />} />
+              <Route path="/daily-timesheet" element={<DailyTimesheet />} />
             </Route>
           {/* </Route> */}
           
