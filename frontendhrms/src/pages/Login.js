@@ -60,10 +60,11 @@ const Login = () => {
           </select>
         </div>
         <div className="load"> 
-        {loading ? <p>Trying to Login Please wait...</p> : "Login"}
+        {loading ? <p>Trying to Login Please wait...</p> : " "}
         </div>
         {error && <p className="error-message">{error}</p>}
         <button type="submit" disabled={loading}>
+          Login
         </button>
       </form>
       <p>

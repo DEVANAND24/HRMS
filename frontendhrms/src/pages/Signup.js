@@ -113,11 +113,11 @@ const Signup = () => {
           </select>
         </div>
         <div className="loadS">
-        {loading ? <p>Trying to SignUp Please Wait...</p> : "Sign Up"}
+        {loading ? <p>Trying to SignUp Please Wait...</p> : " "}
         </div>
         {error && <p className="error-message">{error}</p>}
         <button type="submit" disabled={loading}>
-          
+          Sign Up
         </button>
       </form>
       <p>
