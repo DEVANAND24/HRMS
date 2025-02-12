@@ -27,7 +27,7 @@ app.use(cors(
 app.use('/auth', authRoutes);
 app.use('/employees', employeeRoutes);
 app.use('/leaves', leaveRoutes);
-app.use('/api/timesheets', timesheetRoutes);
+app.use('/timesheets', timesheetRoutes);
 
 const PORT = process.env.PORT || 5000;
 

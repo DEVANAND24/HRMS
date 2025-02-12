@@ -10,6 +10,7 @@ import EmployeeDirectory from './pages/EmployeeDirectory';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import DailyTimesheet from './pages/DailyTimesheet';
+import HRTimesheets from './pages/HRTimesheets';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
               <Route path="/leave-management" element={<LeaveManagement />} />
               <Route path="/daily-timesheet" element={<DailyTimesheet />} />
+              <Route path="/hr-timesheets" element={<HRTimesheets />} />
             </Route>
           {/* </Route> */}
           
