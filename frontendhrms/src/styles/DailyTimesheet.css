@@ -76,3 +76,14 @@
 .thead1{
   color: white;
 }
+
+.timecal{
+  background-color: #000;
+  align-items: center;
+  color:#e5c999;
+  display:flex;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bolder;
+  padding: 10px;
+}

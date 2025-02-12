@@ -90,7 +90,7 @@ const HRDashboard = () => {
          
         </section>
         <section className="employee-info">
-          <h3>Employee Information</h3>
+          <h3 className='empInf'>Employee Information</h3>
           <table className="employee-table">
             <thead>
               <tr>

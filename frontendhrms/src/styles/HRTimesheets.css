@@ -21,6 +21,7 @@
   .timesheet-table th {
     background-color: #101010;
     text-align: center;
+    color : white;
   }
 
   .timesheet-table td {
