@@ -31,7 +31,7 @@ const HRTimesheets = () => {
     <div>
       <Navbar />
       <div className="hr-timesheets-container">
-        <h2>Employee Timesheets</h2>
+        <h2 className='emp'>Employee Timesheets</h2>
         <table className="timesheet-table">
           <thead>
             <tr>

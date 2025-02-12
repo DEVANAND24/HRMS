@@ -111,7 +111,7 @@ const DailyTimesheet = () => {
     <div>
       <Navbar />
       <div className="timesheet-container">
-        <h2>Daily Timesheet</h2>
+        <h2 className='dtsh2'>Daily Timesheet</h2>
         {error && <p className="error-message">{error}</p>}
         {!timesheet && (
           <button onClick={startSession} disabled={loading}>
@@ -119,7 +119,7 @@ const DailyTimesheet = () => {
           </button>
         )}
         {timesheet && !timesheet.logoutTime && (
-          <div>
+          <div className='timediv'>
             <p>Session started at: {new Date(timesheet.loginTime).toLocaleTimeString()}</p>
             <p>Elapsed time: {Math.floor(timer / 60)}m {timer % 60}s</p>
             <div className="task-input">

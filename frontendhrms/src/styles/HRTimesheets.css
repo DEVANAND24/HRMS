@@ -21,7 +21,7 @@
   
   .timesheet-table th {
     background-color: #101010;
-    text-align: left;
+    text-align: center;
   }
 
   .timesheet-table td {
@@ -29,3 +29,13 @@
     color : black;
   }
   
+  .emp{
+    background-color: #000;
+    align-items: center;
+    color:#e5c999;
+    display:flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 10px;
+  }

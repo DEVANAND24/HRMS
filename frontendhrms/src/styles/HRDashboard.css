@@ -3,7 +3,7 @@
     max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
-    background: rgb(27, 27, 27);
+    background: #e5c999;
     border-radius: 8px;
     color: #f7f2f2;
   }
@@ -36,4 +36,26 @@
   .upcoming-leaves td {
     border: 1px solid #ddd;
     padding: 8px;
+  }
+
+  .hrd1{
+    background-color: #000;
+    align-items: center;
+    color:#e5c999;
+    display:flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 10px;
+  }
+
+  .hrd2{
+    background-color: #000;
+    align-items: center;
+    color:#e5c999;
+    display:flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 10px;
   }

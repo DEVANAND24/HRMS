@@ -70,8 +70,8 @@ const HRDashboard = () => {
     <>
       <Navbar />
       <div className="dashboard-container">
-        <h2>HR Dashboard</h2>
-        <section className="employee-info">
+        <h2 className="hrd1">HR Dashboard</h2>
+        <section className="employee-info1">
           <h3>My Information</h3>
           <p>
             <strong>Name:</strong> {user.name}
@@ -112,7 +112,7 @@ const HRDashboard = () => {
         </section>
 
         <section className="upcoming-leaves">
-          <h3>Leave Requests</h3>
+          <h3 className="hrd2">Leave Requests</h3>
           <table className="employee-table">
             <thead>
               <tr>
