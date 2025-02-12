@@ -65,7 +65,7 @@ const EmployeeDashboard = () => {
             <strong>Name:</strong> {user.name}
           </p>
           <p>
-            <strong>Department:</strong> {user.department || "N/A"}
+            <strong>Department:</strong> {user.department}
           </p>
           <p>
             <strong>Email:</strong> {user.email}

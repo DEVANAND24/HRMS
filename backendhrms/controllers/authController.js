@@ -50,6 +50,8 @@ export const login = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        department: user.department,
+        contact: user.mobile,
         token: generateToken(user._id, user.role),
       });
     } else {

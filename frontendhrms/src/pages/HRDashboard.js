@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar';
 import AuthContext from '../context/AuthContext';
 import '../styles/HRDashboard.css';
 
-const BASE_URL = "https://hrms-backend-yxcw.onrender.com";
 
 const HRDashboard = () => {
   const { user } = useContext(AuthContext);
@@ -85,6 +84,7 @@ const HRDashboard = () => {
           <p>
             <strong>Department:</strong> {user.department}
           </p>
+          <p><strong>Contact:</strong>{user.mobile}</p>
          
         </section>
         <section className="employee-info">
