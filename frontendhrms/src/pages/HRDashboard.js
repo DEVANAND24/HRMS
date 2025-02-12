@@ -84,7 +84,7 @@ const HRDashboard = () => {
           <p>
             <strong>Department:</strong> {user.department}
           </p>
-          <p><strong>Contact:</strong>{user.mobile}</p>
+          <p><strong>Contact:</strong>{user.contact}</p>
          
         </section>
         <section className="employee-info">
