@@ -23,13 +23,14 @@ export const signup = async (req, res) => {
       password,
       contact: mobile,
       department: department,
-      role: role || 'Employee',
+      role: role,
     });
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       role: user.role,
+      contact: user.mobile,
       department: user.department,
       token: generateToken(user._id, user.role),
     });

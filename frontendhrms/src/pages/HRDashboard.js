@@ -79,7 +79,7 @@ const HRDashboard = () => {
           </p>
 
           <p>
-            <strong>Contact:</strong> {user.email}
+            <strong>Email:</strong> {user.email}
           </p>
 
           <p>

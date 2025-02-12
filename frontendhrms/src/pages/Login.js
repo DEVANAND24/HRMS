@@ -6,7 +6,7 @@ import '../styles/Login.css';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
-  const [formData, setFormData] = useState({ email: '', password: '', role: 'Employee' });
+  const [formData, setFormData] = useState({ email: '', password: '', role: '' });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 

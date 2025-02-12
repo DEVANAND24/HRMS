@@ -68,7 +68,10 @@ const EmployeeDashboard = () => {
             <strong>Department:</strong> {user.department || "N/A"}
           </p>
           <p>
-            <strong>Contact:</strong> {user.email}
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p>
+            <strong>Contact:</strong> {user.mobile}
           </p>
         </section>
         <section className="upcoming-leaves1">
