@@ -68,11 +68,25 @@ const HRDashboard = () => {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
       <div className="dashboard-container">
         <h2>HR Dashboard</h2>
-        
+        <section className="employee-info">
+          <h3>My Information</h3>
+          <p>
+            <strong>Name:</strong> {user.name}
+          </p>
+
+          <p>
+            <strong>Contact:</strong> {user.email}
+          </p>
+
+          <p>
+            <strong>Department:</strong> {user.department || "N/A"}
+          </p>
+         
+        </section>
         <section className="employee-info">
           <h3>Employee Information</h3>
           <table className="employee-table">
@@ -132,7 +146,7 @@ const HRDashboard = () => {
 
        
       </div>
-    </div>
+    </>
   );
 };
 
