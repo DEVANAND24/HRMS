@@ -7,21 +7,25 @@ import '../styles/Login.css';
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: '', password: '', role: 'Employee' });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
+    setError(null); // Clear error when user changes input
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real app, verify credentials via API.
-    login(formData);
-    const userData = {
-      email: formData.email,
-      role: formData.role,
-      name: '', // This would come from the backend.
-    };
-    login(userData);
+    setError(null);
+    setLoading(true);
+    try {
+      await login(formData);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,7 +59,10 @@ const Login = () => {
             <option value="HR">HR</option>
           </select>
         </div>
-        <button type="submit">Login</button>
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "Login"}
+        </button>
       </form>
       <p>
         Don't have an account? <Link to="/signup">Sign up here.</Link>
@@ -65,5 +72,3 @@ const Login = () => {
 };
 
 export default Login;
-
-

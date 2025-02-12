@@ -12,17 +12,42 @@ const Signup = () => {
     password: '',
     mobile: '',
     department: '',
-    role: '',
+    role: 'Employee',
   });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
+    setError(null); // Clear any existing error message
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    // Basic client-side validation
+    if (!formData.name || !formData.email || !formData.password || !formData.mobile) {
+      setError("Please fill in all required fields.");
+      return false;
+    }
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return false;
+    }
+    // You could also add email format validation here if needed.
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Call the signup function from AuthContext with formData
-    signup(formData);
+    if (!validateForm()) return;
+    setLoading(true);
+    setError(null);
+    try {
+      await signup(formData);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,18 +102,20 @@ const Signup = () => {
           </select>
         </div>
         <div className="form-group">
-          <label>Department</label>
-          <select name= "department" value={formData.department} onChange={handleChange}>
-            <option value="">All Departments</option>
+          <label>Department:</label>
+          <select name="department" value={formData.department} onChange={handleChange}>
+            <option value="">Select Department</option>
             <option value="Developer">Developer</option>
             <option value="Sales">Sales</option>
             <option value="Marketing">Marketing</option>
             <option value="Analyst">Analyst</option>
-
             {/* Add other departments as needed */}
           </select>
         </div>
-        <button type="submit">Sign Up</button>
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "Sign Up"}
+        </button>
       </form>
       <p>
         Already have an account? <Link to="/login">Login here.</Link>
