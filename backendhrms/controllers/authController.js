@@ -10,6 +10,7 @@ const generateToken = (id, role) => {
 // Signup endpoint
 export const signup = async (req, res) => {
   const { name, email, password, mobile, department, role } = req.body;
+  const userRole = role && role.trim() ? role : 'Employee';
   try {
     // Check if the user already exists
     const existingUser = await Employee.findOne({ email });
@@ -23,7 +24,7 @@ export const signup = async (req, res) => {
       password,
       contact: mobile,
       department: department,
-      role: role,
+      role: userRole,
     });
     res.status(201).json({
       _id: user._id,
