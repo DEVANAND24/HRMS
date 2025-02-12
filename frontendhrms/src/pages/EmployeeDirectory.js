@@ -44,7 +44,7 @@ const EmployeeDirectory = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar/>
       <div className="employee-directory-container">
         <h2>Employee Directory</h2>
         <div className="filter-section">
@@ -56,8 +56,12 @@ const EmployeeDirectory = () => {
           />
           <select value={department} onChange={(e) => setDepartment(e.target.value)}>
             <option value="">All Departments</option>
-            <option value="Engineering">Engineering</option>
+            <option value="Developer">Developer</option>
             <option value="Sales">Sales</option>
+            <option value="Digital-Marketing">Marketing</option>
+            <option value="Analyst">Analyst</option>
+
+
             {/* Add other departments as needed */}
           </select>
         </div>

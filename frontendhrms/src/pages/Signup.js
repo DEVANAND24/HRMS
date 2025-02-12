@@ -107,7 +107,7 @@ const Signup = () => {
             <option value="">Select Department</option>
             <option value="Developer">Developer</option>
             <option value="Sales">Sales</option>
-            <option value="Marketing">Marketing</option>
+            <option value="Digital-Marketing">Marketing</option>
             <option value="Analyst">Analyst</option>
             {/* Add other departments as needed */}
           </select>
