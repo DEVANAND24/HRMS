@@ -59,9 +59,11 @@ const Login = () => {
             <option value="HR">HR</option>
           </select>
         </div>
+        <div className="load"> 
+        {loading ? <p>Trying to Login Please wait...</p> : "Login"}
+        </div>
         {error && <p className="error-message">{error}</p>}
         <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Login"}
         </button>
       </form>
       <p>

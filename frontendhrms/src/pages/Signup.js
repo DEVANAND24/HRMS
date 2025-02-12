@@ -112,9 +112,12 @@ const Signup = () => {
             {/* Add other departments as needed */}
           </select>
         </div>
+        <div className="loadS">
+        {loading ? <p>Trying to SignUp Please Wait...</p> : "Sign Up"}
+        </div>
         {error && <p className="error-message">{error}</p>}
         <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Sign Up"}
+          
         </button>
       </form>
       <p>
