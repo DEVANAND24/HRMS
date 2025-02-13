@@ -64,7 +64,7 @@ const DailyTimesheet = () => {
     setLoading(false);
   };
 
-  // End timesheet session
+  // End timesheet session (only called when user explicitly clicks End Session)
   const endSession = async () => {
     setLoading(true);
     try {
@@ -112,20 +112,27 @@ const DailyTimesheet = () => {
     }
   };
 
-  // Restore active session from localStorage and fetch history on mount
+  // Restore active session from localStorage on mount, only if there's an active session;
+  // otherwise, fetch history from backend.
   useEffect(() => {
     const savedSession = localStorage.getItem(timesheetKey);
     if (savedSession) {
       const session = JSON.parse(savedSession);
       if (!session.logoutTime) {
+        // Active session found: restore it and start the timer
         setTimesheet(session);
         const elapsed = calculateElapsedTime(session.loginTime);
         setTimer(elapsed);
         const id = setInterval(() => setTimer((prev) => prev + 1), 1000);
         setIntervalId(id);
+      } else {
+        // If the saved session is ended, fetch history to show past sessions
+        fetchTimesheetHistory();
       }
+    } else {
+      // No saved session: fetch history
+      fetchTimesheetHistory();
     }
-    fetchTimesheetHistory();
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
