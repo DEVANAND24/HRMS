@@ -1,5 +1,5 @@
 // src/context/AuthContext.js
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -7,9 +7,9 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  // Store session per tab instead of global storage
+  // Retrieve user from localStorage so the login persists even after closing the tab
   const [user, setUser] = useState(() => {
-    const storedUser = sessionStorage.getItem('currentUser'); // Use sessionStorage instead of localStorage
+    const storedUser = localStorage.getItem('currentUser');
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
@@ -24,10 +24,10 @@ export const AuthProvider = ({ children }) => {
     });
     const data = await response.json();
     if (!response.ok) {
-      throw new Error(data.message || "Login failed");
+      throw new Error(data.message || 'Login failed');
     }
     setUser(data);
-    sessionStorage.setItem('currentUser', JSON.stringify(data)); // Store user session per tab
+    localStorage.setItem('currentUser', JSON.stringify(data));
     navigate(data.role === 'HR' ? '/hr-dashboard' : '/employee-dashboard');
   };
 
@@ -40,32 +40,20 @@ export const AuthProvider = ({ children }) => {
     });
     const data = await response.json();
     if (!response.ok) {
-      throw new Error(data.message || "Signup failed");
+      throw new Error(data.message || 'Signup failed');
     }
     setUser(data);
-    sessionStorage.setItem('currentUser', JSON.stringify(data)); // Store user session per tab
+    localStorage.setItem('currentUser', JSON.stringify(data));
     navigate(data.role === 'HR' ? '/hr-dashboard' : '/employee-dashboard');
   };
 
-  // Logout function
+  // Logout function: Clear user from localStorage and update state.
+  // This logout will only affect the current tab.
   const logout = () => {
     setUser(null);
-    sessionStorage.removeItem('currentUser'); // Only clear session in the current tab
+    localStorage.removeItem('currentUser');
     navigate('/login');
   };
-
-  // Sync logout across tabs (Optional, if needed)
-  useEffect(() => {
-    const handleStorageChange = (event) => {
-      if (event.key === 'logout-event') {
-        setUser(null);
-        navigate('/login');
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [navigate]);
 
   return (
     <AuthContext.Provider value={{ user, login, signup, logout }}>
