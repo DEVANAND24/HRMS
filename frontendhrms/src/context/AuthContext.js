@@ -1,5 +1,5 @@
 // src/context/AuthContext.js
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -47,13 +47,26 @@ export const AuthProvider = ({ children }) => {
     navigate(data.role === 'HR' ? '/hr-dashboard' : '/employee-dashboard');
   };
 
-  // Logout function: Clear user from localStorage and update state.
-  // This logout will only affect the current tab.
+  // Logout function: clear user from localStorage and update state
   const logout = () => {
     setUser(null);
     localStorage.removeItem('currentUser');
+    // Optionally, you can set a flag to sync logout across tabs
+    localStorage.setItem('logout-event', Date.now());
     navigate('/login');
   };
+
+  // Optional: Listen for storage changes to sync logout across tabs
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === 'logout-event') {
+        setUser(null);
+        navigate('/login');
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [navigate]);
 
   return (
     <AuthContext.Provider value={{ user, login, signup, logout }}>
