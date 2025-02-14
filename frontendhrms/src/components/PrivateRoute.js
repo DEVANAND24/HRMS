@@ -14,7 +14,7 @@ const PrivateRoute = ({ role, children }) => {
     return <Navigate to="/" />;
   }
 
-  return children;
+  return children ? children : <Outlet />;
 };
 
 export default PrivateRoute;
