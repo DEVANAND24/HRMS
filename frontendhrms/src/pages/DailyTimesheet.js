@@ -64,8 +64,11 @@ const DailyTimesheet = () => {
     setLoading(false);
   };
 
-  // End timesheet session (only called when user explicitly clicks End Session)
+  // End timesheet session (only called when user explicitly clicks End Session or auto-end condition is met)
   const endSession = async () => {
+    // Prevent calling endSession if there's no active session
+    if (!timesheet || timesheet.logoutTime) return;
+    
     setLoading(true);
     try {
       const res = await fetch(`${apiUrl}/end`, {
@@ -95,6 +98,14 @@ const DailyTimesheet = () => {
     setLoading(false);
   };
 
+  // Auto-end session if elapsed time reaches or exceeds 12 hours (43200 seconds)
+  useEffect(() => {
+    if (timesheet && !timesheet.logoutTime && timer >= 43200) {
+      // You could optionally alert the user before auto-ending
+      endSession();
+    }
+  }, [timer, timesheet]);
+
   // Fetch timesheet history for calendar and table display
   const fetchTimesheetHistory = async () => {
     try {
@@ -112,27 +123,28 @@ const DailyTimesheet = () => {
     }
   };
 
-  // Restore active session from localStorage on mount, only if there's an active session;
-  // otherwise, fetch history from backend.
+  // Restore active session from localStorage on mount, only if it's from today
   useEffect(() => {
     const savedSession = localStorage.getItem(timesheetKey);
     if (savedSession) {
       const session = JSON.parse(savedSession);
-      if (!session.logoutTime) {
-        // Active session found: restore it and start the timer
+      // Check if the saved session is from today
+      const loginDate = new Date(session.loginTime);
+      const today = new Date();
+      loginDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      if (loginDate.getTime() === today.getTime() && !session.logoutTime) {
         setTimesheet(session);
         const elapsed = calculateElapsedTime(session.loginTime);
         setTimer(elapsed);
         const id = setInterval(() => setTimer((prev) => prev + 1), 1000);
         setIntervalId(id);
       } else {
-        // If the saved session is ended, fetch history to show past sessions
-        fetchTimesheetHistory();
+        // Remove expired session (from previous day)
+        localStorage.removeItem(timesheetKey);
       }
-    } else {
-      // No saved session: fetch history
-      fetchTimesheetHistory();
     }
+    fetchTimesheetHistory();
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
