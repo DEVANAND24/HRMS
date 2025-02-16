@@ -5,7 +5,7 @@ import Timesheet from '../models/Timesheet.js';
 export const startTimesheet = async (req, res) => {
   try {
     const employeeId = req.user._id;
-    // Set today's date to midnight (so we treat all logins on the same day equally)
+    // Set today's date to midnight (to treat all logins on the same day equally)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -41,15 +41,14 @@ export const endTimesheet = async (req, res) => {
       return res.status(400).json({ message: 'Timesheet already ended for today' });
     }
 
-
     timesheet.logoutTime = new Date();
     timesheet.tasks = req.body.tasks;
     timesheet.githubLink = req.body.githubLink;
 
-    // Calculate the duration in hours.
-    const minDuration = (timesheet.logoutTime - timesheet.loginTime) / (1000 * 60 * 60);
-    // Mark as "Present" only if the session is 9 or more hours; otherwise "Absent"
-    timesheet.status = (minDuration >= 9) ? 'Present' : 'Absent';
+    // Calculate the session duration in hours.
+    const duration = (timesheet.logoutTime - timesheet.loginTime) / (1000 * 60 * 60);
+    // Mark as "Present" if session duration is equal to or greater than 9 hours; otherwise, mark as "Absent"
+    timesheet.status = duration >= 9 ? 'Present' : 'Absent';
 
     const updatedTimesheet = await timesheet.save();
     res.json(updatedTimesheet);
