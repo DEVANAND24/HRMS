@@ -41,6 +41,7 @@ export const endTimesheet = async (req, res) => {
       return res.status(400).json({ message: 'Timesheet already ended for today' });
     }
 
+
     timesheet.logoutTime = new Date();
     timesheet.tasks = req.body.tasks;
     timesheet.githubLink = req.body.githubLink;
