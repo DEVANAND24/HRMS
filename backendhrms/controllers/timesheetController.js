@@ -41,13 +41,14 @@ export const endTimesheet = async (req, res) => {
       return res.status(400).json({ message: 'Timesheet already ended for today' });
     }
 
+    // Set logout time to current time
     timesheet.logoutTime = new Date();
     timesheet.tasks = req.body.tasks;
     timesheet.githubLink = req.body.githubLink;
 
-    // Calculate the session duration in hours.
-    const duration = (timesheet.logoutTime - timesheet.loginTime) / (1000 * 60 * 60);
-    // Mark as "Present" if session duration is equal to or greater than 9 hours; otherwise, mark as "Absent"
+    // Calculate the session duration in hours using proper Date conversions.
+    const duration = (new Date(timesheet.logoutTime) - new Date(timesheet.loginTime)) / (1000 * 60 * 60);
+    // Mark as "Present" if duration is equal to or greater than 9 hours; otherwise, mark as "Absent"
     timesheet.status = duration >= 9 ? 'Present' : 'Absent';
 
     const updatedTimesheet = await timesheet.save();
