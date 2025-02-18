@@ -100,8 +100,7 @@ const DailyTimesheet = () => {
 
   // Auto-end session if elapsed time reaches or exceeds 12 hours (43200 seconds)
   useEffect(() => {
-    if (timesheet && !timesheet.logoutTime && timer >= 43200) {
-      // You could optionally alert the user before auto-ending
+    if (timesheet && !timesheet.logoutTime && timer >= 43200 && !loading) {
       endSession();
     }
   }, []);
@@ -123,7 +122,7 @@ const DailyTimesheet = () => {
     }
   };
 
-  // Restore active session from localStorage on mount, only if it's from today
+  // Restore active session from localStorage on mount, only if it's from today; otherwise, remove it.
   useEffect(() => {
     const savedSession = localStorage.getItem(timesheetKey);
     if (savedSession) {
@@ -140,7 +139,6 @@ const DailyTimesheet = () => {
         const id = setInterval(() => setTimer((prev) => prev + 1), 1000);
         setIntervalId(id);
       } else {
-        // Remove expired session (from previous day)
         localStorage.removeItem(timesheetKey);
       }
     }
@@ -150,11 +148,13 @@ const DailyTimesheet = () => {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Update the calendar marks with submitted timesheets
+  // Update the calendar marks with submitted timesheets (only sessions that have ended)
   const marks = {};
   timesheetsHistory.forEach((ts) => {
-    const dateStr = new Date(ts.date).toDateString();
-    marks[dateStr] = ts.status;
+    if (ts.logoutTime) { // Only add if the session has ended
+      const dateStr = new Date(ts.date).toDateString();
+      marks[dateStr] = ts.status;
+    }
   });
 
   return (
