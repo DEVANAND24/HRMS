@@ -100,11 +100,11 @@ const DailyTimesheet = () => {
 
   // Auto-end session if elapsed time reaches or exceeds 12 hours (43200 seconds)
   useEffect(() => {
-    if (timesheet && !timesheet.logoutTime && timer >= 43200 && loading) {
-      // Auto-end the session (this will mark it as Present, because 12 hours >= 9 hours)
+    if (timesheet && !timesheet.logoutTime && timer >= 43200) {
+      // You could optionally alert the user before auto-ending
       endSession();
     }
-  }, [timer, timesheet, loading]);
+  }, []);
 
   // Fetch timesheet history for calendar and table display
   const fetchTimesheetHistory = async () => {
@@ -123,11 +123,12 @@ const DailyTimesheet = () => {
     }
   };
 
-  // Restore active session from localStorage on mount, only if it's from today; otherwise, remove it.
+  // Restore active session from localStorage on mount, only if it's from today
   useEffect(() => {
     const savedSession = localStorage.getItem(timesheetKey);
     if (savedSession) {
       const session = JSON.parse(savedSession);
+      // Check if the saved session is from today
       const loginDate = new Date(session.loginTime);
       const today = new Date();
       loginDate.setHours(0, 0, 0, 0);
@@ -139,6 +140,7 @@ const DailyTimesheet = () => {
         const id = setInterval(() => setTimer((prev) => prev + 1), 1000);
         setIntervalId(id);
       } else {
+        // Remove expired session (from previous day)
         localStorage.removeItem(timesheetKey);
       }
     }
