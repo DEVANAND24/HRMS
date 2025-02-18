@@ -100,7 +100,7 @@ const DailyTimesheet = () => {
 
   // Auto-end session if elapsed time reaches or exceeds 12 hours (43200 seconds)
   useEffect(() => {
-    if (timesheet && !timesheet.logoutTime && timer >= 43200 && !loading) {
+    if (timesheet && !timesheet.logoutTime && timer >= 43200 && loading) {
       // Auto-end the session (this will mark it as Present, because 12 hours >= 9 hours)
       endSession();
     }
