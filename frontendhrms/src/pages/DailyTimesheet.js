@@ -99,11 +99,11 @@ const DailyTimesheet = () => {
   };
 
   // Auto-end session if elapsed time reaches or exceeds 12 hours (43200 seconds)
-  useEffect(() => {
-    if (timesheet && !timesheet.logoutTime && timer >= 43200 && !loading) {
-      endSession();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (timesheet && !timesheet.logoutTime && timer >= 43200 && !loading) {
+  //     endSession();
+  //   }
+  // }, []);
 
   // Fetch timesheet history for calendar and table display
   const fetchTimesheetHistory = async () => {
